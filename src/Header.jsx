@@ -1,15 +1,15 @@
-import React, {Component} from "react";
+import React from "react";
 
-class Header extends Component {
-    render(){
-        return(
-            <>
-            <header>
-                <h1>Mi aplicación de React</h1>
-            </header>
-            </>
-        )
-    }
+function Header() {
+    const titulo = "Módulo 2 - Trabajo Práctico 1"
+    return(
+        <>
+        <header>
+            <h1>{titulo}</h1>
+        </header>
+        </>
+    )
+
 }
 
 export default Header;
