@@ -59,3 +59,8 @@ header {
 	margin: 0 auto;
 	width: 1000px;
 }
+
+.teamBadge{
+  width: 64px;
+  height: 64px;
+}
