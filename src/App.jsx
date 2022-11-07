@@ -1,22 +1,20 @@
-import Formulario from './Formulario';
-import Titulos from './Titulos';
+import './App.css';
 
+import NavBar from './Components/NavBar';
+import { BrowserRouter as Router } from 'react-router-dom';
+import Public from './Routes/Public';
 
 function App() {
   return (
-  <div className="container">
-    <div className="row justify-content-md-center">
-      <div className="col col-lg-10">
-        <Titulos />
+    <div className="App">
+      <div className='container'>
+        <Router>        
+          <NavBar />
+          <Public />
+        </Router> 
       </div>
     </div>
-    <div className="row justify-content-md-center">
-      <div className="col col-lg-10">      
-        <Formulario />
-      </div>
-    </div>
-</div>  
   );
 }
-export default App;
 
+export default App;
