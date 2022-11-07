@@ -1,8 +1,7 @@
 import React from 'react';
 import Productos from '../Components/Productos';
 
-
-function Home(){
+function Home(){    
     return(
         <Productos />
     )
