@@ -1,20 +1,24 @@
 import { useState } from "react"
 
 function Signup(){
-    const [firstname, setFirstname] = useState('');
-    const [lastname, setLastname] = useState('');
-    const [username, setUsername] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [passwordRepeat, setPasswordRepeat] = useState('');
+    const [form, setForm] = useState({
+        firstname: '',
+        lastname: '',
+        username: '',
+        email: '',
+        password: '',
+        passwordrepeat: ''
+    })
+    const handleChange = (e) =>{
+        const target = e.target;
+        const name = target.name;
+        const value = target.value;
+        setForm({...form, [name]:value});
+
+    }
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log('firstname: ', firstname);
-        console.log('lastname: ', lastname);
-        console.log('username: ', username);
-        console.log('email: ', email);
-        console.log('password: ', password);
-        console.log('passwordRepeat: ', passwordRepeat);
+        console.log('form: ', form);
     }
     return(
 <div className="row justify-content-md-center pt-5" >    
@@ -27,12 +31,12 @@ function Signup(){
                 
                 <div className="col-md-6">
                     <label for="firstname" className="form-label">Nombre</label>
-                    <input type="text" className="form-control" id="firstname" value={firstname} onChange={(e)=>setFirstname(e.target.value)} />
+                    <input type="text" className="form-control" id="firstname" name="firstname" value={form.firstname} onChange={handleChange} />
                 </div>
 
                 <div className="col-md-6">
                     <label for="lastname" className="form-label">Apellido</label>
-                    <input type="text" className="form-control" id="lastname" value={lastname} onChange={(e)=>setLastname(e.target.value)} />
+                    <input type="text" className="form-control" id="lastname" name="lastname" value={form.lastname} onChange={handleChange} />
                 </div>   
             </div>
 
@@ -40,12 +44,12 @@ function Signup(){
                 
                 <div className="col-md-6">
                     <label for="username" className="form-label">Nombre de Usuario</label>
-                    <input type="text" className="form-control" id="username"  value={username} onChange={(e)=>setUsername(e.target.value)}  />
+                    <input type="text" className="form-control" id="username" name="username"  value={form.username} onChange={handleChange}  />
                 </div>
 
                 <div className="col-md-6">
                     <label for="email" className="form-label">Correo electrónico</label>
-                    <input type="email" className="form-control" id="email" value={email} onChange={(e)=>setEmail(e.target.value)} />
+                    <input type="email" className="form-control" id="email" name="email" value={form.email} onChange={handleChange} />
                 </div>   
             </div> 
 
@@ -53,12 +57,12 @@ function Signup(){
                 
                 <div className="col-md-6">
                     <label for="password" className="form-label">Password</label>
-                    <input type="password" className="form-control" id="password" value={password} onChange={(e)=>setPassword(e.target.value)} />
+                    <input type="password" className="form-control" id="password" name="password" value={form.password} onChange={handleChange} />
                 </div>
 
                 <div className="col-md-6">
                     <label for="passwordrepeat" className="form-label">Repetir password</label>
-                    <input type="password" className="form-control" id="passwordrepeat"  value={passwordRepeat} onChange={(e)=>setPasswordRepeat(e.target.value)} />
+                    <input type="password" className="form-control" id="passwordrepeat" name="passwordrepeat"  value={form.passwordRepeat} onChange={handleChange} />
                 </div>   
             </div> 
 
