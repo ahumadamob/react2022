@@ -1,81 +1,56 @@
 import { useForm } from "react-hook-form";
+import { Form,  Button, Alert } from 'react-bootstrap';
 
 function Signup(){
     const { register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = data => console.log(data);
 
     return(
-<div className="row justify-content-md-center pt-5" >    
-        <form className="col-md-10 mt-10" onSubmit={handleSubmit(onSubmit)}>            
-            <div className="row">
-                <h1>Registro</h1>    
-            </div>
+<div className="row justify-content-md-center pt-5" >
+        <Form onSubmit={handleSubmit(onSubmit)}>
+            <Form.Group className="mb-3" controlId="firstname">
+                <Form.Label>Nombre</Form.Label>
+                <Form.Control type="text" placeholder="Tu Nombre" {...register("firstname", {required: true})} />
+                {errors.firstname && <Alert variant="danger">Campo Nombre es obligatorio</Alert>}
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId="lastname">
+                <Form.Label>Apellido</Form.Label>
+                <Form.Control type="text" placeholder="Tu Apellido" {...register("lastname", {required: true})} />
+                {errors.lastname && <Alert variant="danger">Campo Apellido es obligatorio</Alert>}
+            </Form.Group>  
             
-            <div className="row mt-3">
-                
-                <div className="col-md-6">
-                    <label for="firstname" className="form-label">Nombre</label>
-                    <input type="text" className="form-control" {...register("firstname", {required: true})} />
-                    {errors.firstname && <span>Campo Nombre es obligatorio</span>}
-                </div>
+            <Form.Group className="mb-3" controlId="username">
+                <Form.Label>Nombre de Usuario</Form.Label>
+                <Form.Control type="text" placeholder="Elige un nombre de Usuario" {...register("username", {required: true})} />
+                {errors.username && <Alert variant="danger">Campo Nombre de Usuario es obligatorio</Alert>}
+            </Form.Group> 
+            
+            <Form.Group className="mb-3" controlId="email">
+                <Form.Label>Correo electrónico</Form.Label>
+                <Form.Control type="email" placeholder="alguien@sample.com" {...register("email", {required: true})} />
+                {errors.email && <Alert variant="danger">Campo Correo electrónico es obligatorio</Alert>}
+            </Form.Group>
 
-                <div className="col-md-6">
-                    <label for="lastname" className="form-label">Apellido</label>
-                    <input type="text" className="form-control" {...register("lastname", {required: true})} />
-                    {errors.lastname && <span>Campo Apellido es obligatorio</span>}
-                </div>   
-            </div>
+            <Form.Group className="mb-3" controlId="password">
+                <Form.Label>Password</Form.Label>
+                <Form.Control type="text" placeholder="Tu Password" {...register("password", {required: true})} />
+                {errors.password?.type === "required" && <Alert variant="danger">Campo Password es obligatorio</Alert>}
+                {errors.password?.type === "minLength" && <Alert variant="danger">La contraseña debe tener al menos 8 caracteres</Alert>}
+                {errors.password?.type === "maxLength" && <Alert variant="danger">La contraseña no debe superar los 16 caracteres</Alert>}
+            </Form.Group> 
 
-            <div className="row mt-3">
-                
-                <div className="col-md-6">
-                    <label for="username" className="form-label">Nombre de Usuario</label>
-                    <input type="text" className="form-control" {...register("username", {required: true})}  />
-                    {errors.username && <span>Campo Nombre de Usuario es obligatorio</span>}
-                </div>
+            <Form.Group className="mb-3" controlId="passwordrepeat">
+                <Form.Label>Repetir Password</Form.Label>
+                <Form.Control type="text" placeholder="Repite tu Password" {...register("passwordrepeat", {required: true})} />
+                {errors.passwordrepeat?.type === "required" && <Alert variant="danger">Campo Password es obligatorio</Alert>}
+                {errors.passwordrepeat?.type === "minLength" && <Alert variant="danger">La contraseña debe tener al menos 8 caracteres</Alert>}
+                {errors.passwordrepeat?.type === "maxLength" && <Alert variant="danger">La contraseña no debe superar los 16 caracteres</Alert>}
+            </Form.Group>            
 
-                <div className="col-md-6">
-                    <label for="email" className="form-label">Correo electrónico</label>
-                    <input type="email" className="form-control" {...register("email", {required: true})} />
-                    {errors.email && <span>Campo Correo electrónico es obligatorio</span>}
-                </div>   
-            </div> 
+            <Button variant="primary" type="submit">Continuar con el registro</Button>
+        </Form>    
 
-            <div className="row mt-3">
-                
-                <div className="col-md-6">
-                    <label for="password" className="form-label">Password</label>
-                    <input type="password" className="form-control" {...register("password", {required: true, minLength:8, maxLength: 16})} />
-                    {errors.password?.type === "required" && <span>Campo Password es obligatorio</span>}
-                    {errors.password?.type === "minLength" && <span>La contraseña debe tener al menos 8 caracteres</span>}
-                    {errors.password?.type === "maxLength" && <span>La contraseña no debe superar los 16 caracteres</span>}
-                </div>
-
-                <div className="col-md-6">
-                    <label for="passwordrepeat" className="form-label">Repetir password</label>
-                    <input type="password" className="form-control" {...register("passwordrepeat", {required: true, minLength: 8, maxLength: 16})} />
-                    {errors.passwordrepeat?.type === "required" && <span>Campo Repetir Password es obligatorio</span>}
-                    {errors.passwordrepeat?.type === "minLength" && <span>La contraseña debe tener al menos 8 caracteres</span>}
-                    {errors.passwordrepeat?.type === "maxLength" && <span>La contraseña no debe superar los 16 caracteres</span>}                    
-                </div>   
-            </div> 
-
-             <div className="row mt-3 align-items-center">
-                
-                <div className="col-md-6">
-                    <div className="form-check">
-                        <input className="form-check-input" type="checkbox" id="gridCheck" />
-                        <label className="form-check-label" for="gridCheck">
-                            Acepto los Términos y condiciones
-                        </label>
-                    </div>
-                </div>          
-
-                <div className="col-md-6">
-                    <button type="submit" className="btn btn-primary">Continuar con el Registro</button>
-                </div>   
-            </div>                                  
-        </form>
     </div>
 
     )
