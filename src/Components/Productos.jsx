@@ -5,12 +5,13 @@ import Producto from "./Producto"
 function Productos(){
   const [productos,setProductos] = useState([])
   const [isLoading,setIsloading] = useState(true)
+  const [buscar, setBuscar] = useState('messi')
 
   useEffect(
     ()=>{
       const result = async ()=>{
         try{
-          const responseData = await getAllProductos()
+          const responseData = await getAllProductos(buscar)
           console.log(responseData.data)
           setProductos(responseData.data.results)
           setIsloading(false)
@@ -21,7 +22,7 @@ function Productos(){
       }
       result()
     },
-    []
+    [buscar]
   )
   if(isLoading){
       return(
@@ -42,7 +43,8 @@ function Productos(){
         <div className="row justify-content-md-center pt-5" >
           <div className="col-md-11">
             <div className="row mt-2">
-                  <h3>Listado de Productos</h3>    
+                  <h3>Listado de Productos</h3>
+                  <input type="text" value={buscar} onChange={(e)=>setBuscar(e.target.value)} />    
               </div> 
 
             <div className='row mt-1'>

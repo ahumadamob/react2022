@@ -1,6 +1,6 @@
 import instance from "../Config/axios"
-export function getAllProductos(){
-    return instance.get("sites/MLA/search?q=messi")
+export function getAllProductos(buscar){
+    return instance.get(`sites/MLA/search?q=${buscar}`)
 }
 export function getByIdProductos(id){
     return instance.get(`items/${id}`)
