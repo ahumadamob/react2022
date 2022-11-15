@@ -1,26 +1,25 @@
 import { Link } from "react-router-dom"
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
 
 function NavBar(){
     return(
-      <nav className="navbar navbar-expand-lg bg-light">
-        <div className="container-fluid">
-          <div className="collapse navbar-collapse" id="navbarNav">
-            <ul className="navbar-nav">
-              <li className="nav-item">
-                <Link to="/" className="nav-link active" aria-current="page">Home</Link>
-              </li>
-              <li className="nav-item">
-                <Link to="/signup" className="nav-link active" aria-current="page">Registro</Link>
-              </li>
-              <li className="nav-item">
-                <Link to="/login" className="nav-link active" aria-current="page">Ingresar</Link>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-
+      <>
+        <Navbar bg="light" expand="lg">
+          <Navbar.Brand as={Link} to="/">Home</Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="me-auto">            
+              <Nav.Link as={Link} to="/signup">Registro</Nav.Link>
+              <Nav.Link as={Link} to="/login">Ingresar</Nav.Link>
+              <NavDropdown title="Productos" id="basic-nav-dropdown">
+                <NavDropdown.Item as={Link} to="/productos/alta">Alta</NavDropdown.Item>
+              </NavDropdown>
+            </Nav>
+          </Navbar.Collapse>
+        </Navbar>
+      </>
     )
 }
-
 export default NavBar

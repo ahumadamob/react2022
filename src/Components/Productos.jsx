@@ -11,9 +11,9 @@ function Productos(){
     ()=>{
       const result = async ()=>{
         try{
-          const responseData = await getAllProductos(buscar)
-          console.log(responseData.data)
-          setProductos(responseData.data.results)
+          const productos = await getAllProductos(buscar)
+          console.log(productos)
+          setProductos(productos)
           setIsloading(false)
         }catch(e){
           console.log(e)
@@ -47,8 +47,8 @@ function Productos(){
                   <input type="text" value={buscar} onChange={(e)=>setBuscar(e.target.value)} />    
               </div> 
 
-            <div className='row mt-1'>
-              {productos.map(producto => <Producto {...producto} />)}
+            <div className='row mt-1'>              
+              {productos.map(producto => <Producto {...producto.data()} id={producto.id} />)}
             </div>          
           </div>
         </div>

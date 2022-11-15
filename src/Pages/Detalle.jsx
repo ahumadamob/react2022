@@ -12,10 +12,10 @@ function Detalle(){
         ()=>{
           const result = async ()=>{
             try{
-              const responseData = await getByIdProductos(id)
-              if(responseData.data){
-                console.log(responseData.data);
-                setProducto(responseData.data)
+              const productoData = await getByIdProductos(id)
+              if(productoData){
+                console.log(productoData.data());
+                setProducto(productoData.data())
               }
               
               setIsloading(false)
@@ -50,26 +50,15 @@ function Detalle(){
               <div className="row mt-2">
                 <div className="card" >
                   <div className="card-body">
-                    <h5 className="card-title">{producto.title}</h5>
-                    <h6 className="card-subtitle mb-2 text-muted">{producto.category_id}</h6>
+                    <h5 className="card-title">{producto.name}</h5>
+                    <h6 className="card-subtitle mb-2 text-muted">{producto.description}</h6>
                     
                     <div className="row">
-                      {producto.pictures.map( (picture) =>
-                        <div className="col-2 shadow-sm p-3 mb-5 bg-body rounded m-2">
-                          <img src={picture.url} className="d-block w-100 shadow-sm" alt={picture.id} />
-                        </div>                      
-                      )}  
+                      <img src={producto.image} className="d-block w-100 shadow-sm" alt={producto.image} />
                     </div> 
                     <hr />
                     <div className="row align-items-center">
-                      
-                      <div className="col-4">
-                        Ubicación del vendedor: <span className="fw-bold">{producto.seller_address.city.name}</span> 
-                      </div>
 
-                      <div className="col-4">
-                        Unidades vendidas: <span className="fw-bold">{producto.sold_quantity}</span> 
-                      </div>
                       <div className="col-2">
                         $ <span className="fw-bold">{producto.price}</span> 
                       </div>

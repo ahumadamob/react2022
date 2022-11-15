@@ -3,26 +3,28 @@ import { Link } from "react-router-dom"
 
 function Producto({
   id,
-  title,
-  category,
+  name,
   price,
-  category_id,
-  thumbnail
+  description,
+  image
 }){
   return (
     <div className="col-2">
       <div className="card">
-        <img src={thumbnail} className="card-img-top" alt={title} />
+        <img src={image} className="card-img-top" alt={name} />
         <div className="card-body">
-          <h5 className="card-title">{title}</h5>
+          <h5 className="card-title">{name}</h5>
         </div>
         <ul className="list-group list-group-flush">
           <li className="list-group-item text-end"><span className="fw-bold">$</span>&nbsp;{price}</li>
-          <li className="list-group-item text-center fw-light">{category_id}</li>
+          <li className="list-group-item text-center fw-light">{description}</li>
         </ul>
         <div className="card-body text-center">
           <Link to={`/producto/${id}`} class="btn btn-primary btn-sm">Ver Detalle</Link>
         </div>
+        <div className="card-body text-center">
+          <Link to={`/productos/modificar/${id}`} class="btn btn-success btn-sm">Modificar</Link>
+        </div>       
       </div>      
     </div>
   )
