@@ -14,7 +14,7 @@ function NavBar(){
               <Nav.Link as={Link} to="/signup">Registro</Nav.Link>
               <Nav.Link as={Link} to="/login">Ingresar</Nav.Link>
               <NavDropdown title="Productos" id="basic-nav-dropdown">
-                <NavDropdown.Item as={Link} to="/productos/alta">Alta</NavDropdown.Item>
+                <NavDropdown.Item as={Link} to="/product/add">Alta</NavDropdown.Item>
               </NavDropdown>
             </Nav>
           </Navbar.Collapse>

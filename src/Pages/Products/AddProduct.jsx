@@ -1,15 +1,13 @@
-import { useForm } from "react-hook-form";
-import {Button, Form} from 'react-bootstrap'
-import firebase from '../Config/firebase'
+import { useForm } from "react-hook-form"
+import { Button, Form } from 'react-bootstrap'
+import firebase from '../../Config/firebase'
 
-function ProductosAlta(){
+function AddProduct(){
     const { register, handleSubmit, formState: { errors } } = useForm();
     const onSubmit = async data => {
-        console.log(data)
         try{
             const document = await firebase.firestore().collection("productos")
             .add(data)
-            console.log(document)
         }catch(e){
             console.log(e)
         }
@@ -52,4 +50,4 @@ function ProductosAlta(){
         </div>
     )
 }
-export default ProductosAlta
+export default AddProduct

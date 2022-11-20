@@ -1,29 +1,25 @@
 import { useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
 import Loading from "../Components/Loading/Loading"
-import { getByIdProductos } from "../Services/productosServices"
+import { getProductById } from "../Services/productService"
 
-function Detalle(){
-    const {id} = useParams()
-    
-    const [producto,setProducto] = useState({})
-    const [isLoading,setIsloading] = useState(true)
+function Checkout(){
+    const {id} = useParams()    
+    const [ product, setProduct ] = useState({})
+    const [ isLoading, setIsloading ] = useState(true)
 
     useEffect(
         ()=>{
           const result = async ()=>{
             try{
-              const productoData = await getByIdProductos(id)
-              if(productoData){
-                console.log(productoData.data());
-                setProducto(productoData.data())
-              }
-              
+              const productData = await getProductById(id)
+              if(productData){
+                setProduct(productData.data())
+              }              
               setIsloading(false)
             }catch(e){
               console.log(e)
-            }
-           
+            }           
           }
           result()
         },
@@ -36,17 +32,17 @@ function Detalle(){
                 <div className="row mt-2">
                   <div className="card" >
                     <div className="card-body">
-                      <h5 className="card-title">{producto.name}</h5>
-                      <h6 className="card-subtitle mb-2 text-muted">{producto.description}</h6>
+                      <h5 className="card-title">{product.name}</h5>
+                      <h6 className="card-subtitle mb-2 text-muted">{product.description}</h6>
                       
                       <div className="row">
-                        <img src={producto.image} className="d-block w-100 shadow-sm" alt={producto.image} />
+                        <img src={product.image} className="d-block w-100 shadow-sm" alt={product.image} />
                       </div> 
                       <hr />
                       <div className="row align-items-center">
 
                         <div className="col-2">
-                          $ <span className="fw-bold">{producto.price}</span> 
+                          $ <span className="fw-bold">{product.price}</span> 
                         </div>
                         <div className="col-2">
                           <button type="button" class="btn btn-success btn-lg">Comprar</button>
@@ -64,4 +60,4 @@ function Detalle(){
     
 }
 
-export default Detalle
+export default Checkout

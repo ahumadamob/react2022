@@ -1,12 +1,12 @@
 import { Route, Routes } from "react-router-dom"
 
-import Signup from '../Pages/Signup';
-import Login from '../Pages/Login';
-import NotFound from '../Pages/NotFound';
-import Home from '../Pages/Home';
-import Detalle from "../Pages/Detalle";
-import ProductosAlta from '../Pages/ProductosAlta';
-import ProductosModificar from "../Pages/ProductosModificar";
+import Signup from '../Pages/Signup'
+import Login from '../Pages/Login'
+import NotFound from '../Pages/NotFound'
+import Home from '../Pages/Home'
+import Checkout from "../Pages/Checkout"
+import AddProduct from "../Pages/Products/AddProduct"
+import EditProduct from "../Pages/Products/EditProduct"
 
 function Public(){
     return(
@@ -14,9 +14,9 @@ function Public(){
           <Route path='/' element={<Home />} />
           <Route path='/signup' element={<Signup />} />
           <Route path='/login' element={<Login />} />
-          <Route path='/producto/:id' element={<Detalle />} />
-          <Route path='/productos/alta' element={<ProductosAlta />} />
-          <Route path='/productos/modificar/:id' element={<ProductosModificar />} />
+          <Route path='/product/:id' element={<Checkout />} />
+          <Route path='/product/add' element={<AddProduct />} />
+          <Route path='/product/edit/:id' element={<EditProduct />} />
           <Route path='*' element={<NotFound />} />
         </Routes>
     )

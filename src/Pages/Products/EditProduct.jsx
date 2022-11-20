@@ -1,11 +1,11 @@
-import { useParams } from "react-router-dom";
-import { useForm } from "react-hook-form";
-import {Button, Form} from 'react-bootstrap'
-import firebase from '../Config/firebase'
+import { useParams } from "react-router-dom"
+import { useForm } from "react-hook-form"
+import { Button, Form } from 'react-bootstrap'
+import firebase from '../../Config/firebase'
 import { useEffect } from "react";
-import { deleteProducto, getByIdProductos, update } from "../Services/productosServices"
+import { getProductById, updateProduct, deleteProduct } from "../../Services/productService"
 
-function ProductosModificar(){
+function EditProduct(){
     const {id} = useParams()
     const { register, handleSubmit, formState: { errors }, setValue } = useForm();
 
@@ -13,13 +13,12 @@ function ProductosModificar(){
         ()=>{
           const result = async ()=>{
             try{
-              const productoData = await getByIdProductos(id)
-              console.log(productoData.data())
-              if(productoData){
-                setValue("name",productoData.data().name)
-                setValue("price",productoData.data().price)
-                setValue("description",productoData.data().description)
-                setValue("image",productoData.data().image)
+              const productData = await getProductById(id)
+              if(productData){
+                setValue("name", productData.data().name)
+                setValue("price", productData.data().price)
+                setValue("description", productData.data().description)
+                setValue("image", productData.data().image)
               }
             }catch(e){
               console.log(e)
@@ -32,19 +31,15 @@ function ProductosModificar(){
       )
 
     const onSubmit = async data => {
-        console.log(data)
         try{
-            const document = await update(id,data)
-            console.log(document)
+            const document = await updateProduct(id,data)
         }catch(e){
             console.log(e)
         }
     }
     const handleDelete = async ()=>{
         try{
-            const document = await deleteProducto(id)
-            console.log(document)
-
+            const document = await deleteProduct(id)
         }catch(e){
             console.log(e)
         }
@@ -90,4 +85,4 @@ function ProductosModificar(){
         </div>
     )
 }
-export default ProductosModificar
+export default EditProduct

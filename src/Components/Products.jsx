@@ -1,27 +1,24 @@
 import React, {useState,useEffect} from "react"
-import { Row, Spinner } from "react-bootstrap"
-import { getAllProductos } from "../Services/productosServices"
+import { Row } from "react-bootstrap"
+import { getAllProducts } from "../Services/productService"
 import Loading from "./Loading/Loading"
-import Producto from "./Producto"
+import Product from "./Product"
 
-
-function Productos(){
-  const [productos,setProductos] = useState([])
-  const [isLoading,setIsloading] = useState(true)
+function Products(){
+  const [ products, setProducts ] = useState([])
+  const [ isLoading, setIsloading] = useState(true)
   const [buscar, setBuscar] = useState('messi')
 
   useEffect(
     ()=>{
       const result = async ()=>{
         try{
-          const productos = await getAllProductos(buscar)
-          console.log(productos)
-          setProductos(productos)
+          const products = await getAllProducts(buscar)
+          setProducts(products)
           setIsloading(false)
         }catch(e){
           console.log(e)
-        }
-       
+        }       
       }
       result()
     },
@@ -36,14 +33,13 @@ function Productos(){
                 <input type="text" value={buscar} onChange={(e)=>setBuscar(e.target.value)} />    
             </div>  
           <Row>
-            {productos.map(producto => <Producto {...producto.data()} id={producto.id} />)}
+            {products.map(product => <Product {...product.data()} id={product.id} />)}
           </Row>             
       
         </div>
       </div> 
     </Loading>        
   ) 
-
 }
 
-export default Productos
+export default Products
