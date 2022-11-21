@@ -16,7 +16,7 @@ function Public(){
           <Route path='/login' element={<Login />} />
           <Route path='/product/:id' element={<Checkout />} />
           <Route path='/product/add' element={<AddProduct />} />
-          <Route path='/product/edit/:id' element={<EditProduct />} />
+          <Route path='/product/edit/:id' element={<AddProduct />} />
           <Route path='*' element={<NotFound />} />
         </Routes>
     )

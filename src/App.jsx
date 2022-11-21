@@ -4,18 +4,23 @@ import NavBar from './Components/NavBar';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Public from './Routes/Public';
 import firebase from './Config/firebase';
+import AuthProvider from './Context/AuthContext';
+import { Container } from 'react-bootstrap';
 
 function App() {
   console.log(firebase);
   return (
     <div className="App">
-      <div className='container'>
-        <Router>        
+      <Router>
+        <AuthProvider>
           <NavBar />
-          <Public />
-        </Router> 
-      </div>
+          <Container>
+            <Public />
+          </Container>        
+        </AuthProvider> 
+      </Router> 
     </div>
+
   );
 }
 
