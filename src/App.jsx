@@ -13,8 +13,8 @@ function App() {
     <div className="App">
       <Router>
         <AuthProvider>
-          <NavBar />
-          <Container>
+          <NavBar />          
+          <Container className="mt-4">
             <Public />
           </Container>        
         </AuthProvider> 

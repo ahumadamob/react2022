@@ -1,4 +1,4 @@
-import { Form, Alert } from 'react-bootstrap';
+import { Form, Alert } from "react-bootstrap";
 
 const styles = {
     alert:{

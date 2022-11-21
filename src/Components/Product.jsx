@@ -1,7 +1,8 @@
 import { React, useContext } from "react"
 import { Link } from "react-router-dom"
-import { Button, Card, Col, Stack, ListGroup } from 'react-bootstrap'
+import { Button, Card, Col, Stack, ListGroup } from "react-bootstrap"
 import { AuthContext } from "../Context/AuthContext";
+import ProductImage from "./ProductImage";
 
 const styles = {
   card:{
@@ -25,7 +26,7 @@ function Product({
   return (
     <Col xs={12} sm={6} lg={4} xxl={3}>
       <Card style={styles.card}>
-        <Card.Img variant="top" src={image} />
+        <ProductImage src={image} smallsize={true} />
         <Card.Body>
           <Card.Title>{name}</Card.Title>
           <Card.Subtitle>{description}</Card.Subtitle>

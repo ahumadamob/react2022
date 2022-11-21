@@ -1,11 +1,9 @@
-import { Link } from "react-router-dom"
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
 import { useContext } from "react"
+import { Link } from "react-router-dom"
+import { Nav, Navbar, NavDropdown } from "react-bootstrap"
 import { AuthContext } from "../Context/AuthContext";
 
-function NavBar({login}){
+function NavBar(){
   const context = useContext(AuthContext)
     return(
       <>
@@ -35,9 +33,9 @@ function NavBar({login}){
                 {
                   context.login &&
                   <>
-                  <NavDropdown title={`${context.user.firstname} ${context.user.lastname}`} id="basic-nav-dropdown">
-                    <NavDropdown.Item onClick={context.handlerLogout}>Cerrar Sesión</NavDropdown.Item>
-                  </NavDropdown>
+                    <NavDropdown title={`${context.user.firstname} ${context.user.lastname}`} id="basic-nav-dropdown">
+                      <NavDropdown.Item onClick={context.handlerLogout}>Cerrar Sesión</NavDropdown.Item>
+                    </NavDropdown>
                   </>
                 }
               </Nav>

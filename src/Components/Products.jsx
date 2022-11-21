@@ -3,17 +3,17 @@ import { Row } from "react-bootstrap"
 import { getAllProducts } from "../Services/productService"
 import Loading from "./Loading/Loading"
 import Product from "./Product"
+import Title from "./Title"
 
 function Products(){
   const [ products, setProducts ] = useState([])
   const [ isLoading, setIsloading] = useState(true)
-  const [buscar, setBuscar] = useState('messi')
 
   useEffect(
     ()=>{
       const result = async ()=>{
         try{
-          const products = await getAllProducts(buscar)
+          const products = await getAllProducts()
           setProducts(products)
           setIsloading(false)
         }catch(e){
@@ -22,24 +22,15 @@ function Products(){
       }
       result()
     },
-    [buscar]
+    []
   )
   return (
     <Loading loading={isLoading}>
-      <div className="row justify-content-md-center pt-5" >
-        <div className="col-md-11">
-          <div className="row mt-2">
-                <h3>Listado de Productos</h3>
-                <input type="text" value={buscar} onChange={(e)=>setBuscar(e.target.value)} />    
-            </div>  
-          <Row>
+        <Title>Listado de Productos</Title>
+        <Row>
             {products.map(product => <Product {...product.data()} id={product.id} />)}
-          </Row>             
-      
-        </div>
-      </div> 
+        </Row> 
     </Loading>        
   ) 
 }
-
 export default Products

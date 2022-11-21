@@ -1,4 +1,4 @@
-import Alert from 'react-bootstrap/Alert';
+import Alert from "react-bootstrap/Alert";
 
 function AlertCustom({variant, text}){
     if(variant && text) {

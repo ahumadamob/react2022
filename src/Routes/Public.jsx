@@ -5,8 +5,7 @@ import Login from '../Pages/Login'
 import NotFound from '../Pages/NotFound'
 import Home from '../Pages/Home'
 import Checkout from "../Pages/Checkout"
-import AddProduct from "../Pages/Products/AddProduct"
-import EditProduct from "../Pages/Products/EditProduct"
+import AddProduct from "../Pages/CreateEditProduct"
 
 function Public(){
     return(

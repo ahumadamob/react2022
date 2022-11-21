@@ -1,15 +1,15 @@
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form"
-import firebase from '../../Config/firebase'
-import Loading from "../../Components/Loading/Loading"
-import Title from "../../Components/Title"
-import { Form,  Button, Alert, Container, Row, Col } from 'react-bootstrap';
-import ErrorField from "../../Components/ErrorField";
-import AlertCustom from "../../Components/AlertCustom";
-import { Link, useParams } from "react-router-dom"
-import { getProductById, updateProduct } from "../../Services/productService"
+import firebase from '../Config/firebase'
+import Loading from "../Components/Loading/Loading"
+import Title from "../Components/Title"
+import { Form,  Button, Alert, Container, Row, Col, Stack } from 'react-bootstrap';
+import ErrorField from "../Components/ErrorField";
+import AlertCustom from "../Components/AlertCustom";
+import { Link, useParams, useNavigate } from "react-router-dom"
+import { deleteProduct, getProductById, updateProduct } from "../Services/productService"
 
-function AddProduct(){
+function CreateEditProduct(){
 
     const {id} = useParams()
     const { register, handleSubmit, formState: { errors }, setValue } = useForm();
@@ -18,6 +18,7 @@ function AddProduct(){
     const [alert, setAlert] = useState({variant: '', text: ''})
     const [title, setTitle] = useState('')
     const [idToEdit, setIdToEdit] = useState('')
+    const navigate = useNavigate()
 
     useEffect(
         ()=>{
@@ -51,22 +52,17 @@ function AddProduct(){
             setValue("image", "")            
           }
         },
-        [id]
+        [id, setValue]
       )
 
     const onSubmit = async data => {
         setIsLoading(true)
         if(id){
             try{
-                //console.log("id?", id)
-                //console.log("data?", data)
-                const document = await updateProduct(id,data)
-                //console.log(document)
-                if(document){ 
-                    setTitle("Producto actualizado correctamente")                   
-                    setSaveSuccess(true)
-                    setIsLoading(false)                                    
-                }
+                await updateProduct(id,data)
+                setTitle("Producto actualizado correctamente")
+                setSaveSuccess(true)
+                setIsLoading(false) 
             }catch(e){
                 console.log(e)
                 setIsLoading(false)
@@ -76,7 +72,7 @@ function AddProduct(){
 
         }else{
             try{
-                const document = await firebase.firestore().collection("productos").add(data)
+                const document = await firebase.firestore().collection("products").add(data)
                 console.log(document.id)
                 if(document){
                     setIdToEdit(document.id)
@@ -91,7 +87,15 @@ function AddProduct(){
                 setAlert({variant: "danger", text: "Ha ocurrido un error"})
             }           
         }
+    }
 
+    const handleDelete = async () => {
+        try{
+            await deleteProduct(id)
+            navigate("/")
+        }catch(e){
+            console.log(e)
+        }
     }
 
     return(
@@ -103,7 +107,7 @@ function AddProduct(){
                         <Row>
                             <Col>
                                 <Alert variant="success">
-                                    El producto ha sido guardado correctamente. Puedes&nbsp;
+                                    El producto ha sido guardado correctamente. Puedes
                                     &nbsp;<Alert.Link as={Link} to={'/'} >ver este producto en el listado principal</Alert.Link>&nbsp;o también es posible
                                     &nbsp;<Alert.Link as={Link} to={`/product/edit/${idToEdit}`} >editarlo desde aquí</Alert.Link>
                                     
@@ -143,8 +147,12 @@ function AddProduct(){
                             <Form.Label>URL Imagen</Form.Label>
                             <Form.Control type="text" placeholder="URL de la Imagen del producto" {...register("image")} />
                         </Form.Group>
-                                    
-                        <Button type="submit" variant="primary">Guardar</Button>                
+                        <Stack direction="horizontal" gap={3}>
+                            <Button type="submit" variant="primary">Guardar</Button>
+                            {id &&
+                                <Button variant="danger" onClick={handleDelete}>Eliminar</Button> 
+                            }
+                        </Stack>        
                     </Form>
                 </>
                 }
@@ -152,4 +160,4 @@ function AddProduct(){
         </Loading>
     )
 }
-export default AddProduct
+export default CreateEditProduct
